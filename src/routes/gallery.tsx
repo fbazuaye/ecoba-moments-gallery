@@ -92,7 +92,7 @@ function Gallery() {
             placeholder="Search titles, captions, photographers…"
             className="w-full rounded-full border border-border bg-card py-2.5 pl-10 pr-4 text-sm outline-none focus:border-gold focus:ring-2 focus:ring-gold/30" />
         </div>
-        <select value={sort} onChange={(e) => navigate({ search: (s) => ({ ...s, sort: e.target.value as any }) })}
+        <select value={sort} onChange={(e) => navigate({ search: (s: z.infer<typeof searchSchema>) => ({ ...s, sort: e.target.value as "newest" | "oldest" | "views" | "featured" }) })}
           className="rounded-full border border-border bg-card px-4 py-2.5 text-sm">
           <option value="newest">Newest First</option>
           <option value="oldest">Oldest First</option>
@@ -106,7 +106,7 @@ function Gallery() {
           const active = (search.day ?? undefined) === c.k;
           return (
             <button key={String(c.k)}
-              onClick={() => navigate({ search: (s) => ({ ...s, day: c.k }) })}
+              onClick={() => navigate({ search: (s: z.infer<typeof searchSchema>) => ({ ...s, day: c.k }) })}
               className={`shrink-0 rounded-full border px-4 py-1.5 text-xs font-medium transition ${
                 active ? "border-gold bg-gold text-forest" : "border-border bg-card hover:border-gold/50"
               }`}>{c.label}</button>
@@ -119,7 +119,7 @@ function Gallery() {
           const active = filter === c.k;
           return (
             <button key={c.k}
-              onClick={() => navigate({ search: (s) => ({ ...s, filter: c.k }) })}
+              onClick={() => navigate({ search: (s: z.infer<typeof searchSchema>) => ({ ...s, filter: c.k }) })}
               className={`shrink-0 rounded-full border px-4 py-1.5 text-xs font-medium transition ${
                 active ? "border-primary bg-primary text-primary-foreground" : "border-border bg-card hover:border-primary/50"
               }`}>{c.label}</button>

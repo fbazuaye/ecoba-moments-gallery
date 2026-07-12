@@ -9,12 +9,43 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as VideosRouteImport } from './routes/videos'
+import { Route as ProgrammeRouteImport } from './routes/programme'
+import { Route as GalleryRouteImport } from './routes/gallery'
+import { Route as FeaturedRouteImport } from './routes/featured'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AlbumsIndexRouteImport } from './routes/albums.index'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
+import { Route as AlbumsSlugRouteImport } from './routes/albums.$slug'
 
+const VideosRoute = VideosRouteImport.update({
+  id: '/videos',
+  path: '/videos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProgrammeRoute = ProgrammeRouteImport.update({
+  id: '/programme',
+  path: '/programme',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GalleryRoute = GalleryRouteImport.update({
+  id: '/gallery',
+  path: '/gallery',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FeaturedRoute = FeaturedRouteImport.update({
+  id: '/featured',
+  path: '/featured',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AlbumsIndexRoute = AlbumsIndexRouteImport.update({
+  id: '/albums/',
+  path: '/albums/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiChatRoute = ApiChatRouteImport.update({
@@ -22,40 +53,129 @@ const ApiChatRoute = ApiChatRouteImport.update({
   path: '/api/chat',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AlbumsSlugRoute = AlbumsSlugRouteImport.update({
+  id: '/albums/$slug',
+  path: '/albums/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/featured': typeof FeaturedRoute
+  '/gallery': typeof GalleryRoute
+  '/programme': typeof ProgrammeRoute
+  '/videos': typeof VideosRoute
+  '/albums/$slug': typeof AlbumsSlugRoute
   '/api/chat': typeof ApiChatRoute
+  '/albums/': typeof AlbumsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/featured': typeof FeaturedRoute
+  '/gallery': typeof GalleryRoute
+  '/programme': typeof ProgrammeRoute
+  '/videos': typeof VideosRoute
+  '/albums/$slug': typeof AlbumsSlugRoute
   '/api/chat': typeof ApiChatRoute
+  '/albums': typeof AlbumsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/featured': typeof FeaturedRoute
+  '/gallery': typeof GalleryRoute
+  '/programme': typeof ProgrammeRoute
+  '/videos': typeof VideosRoute
+  '/albums/$slug': typeof AlbumsSlugRoute
   '/api/chat': typeof ApiChatRoute
+  '/albums/': typeof AlbumsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/api/chat'
+  fullPaths:
+    | '/'
+    | '/featured'
+    | '/gallery'
+    | '/programme'
+    | '/videos'
+    | '/albums/$slug'
+    | '/api/chat'
+    | '/albums/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/api/chat'
-  id: '__root__' | '/' | '/api/chat'
+  to:
+    | '/'
+    | '/featured'
+    | '/gallery'
+    | '/programme'
+    | '/videos'
+    | '/albums/$slug'
+    | '/api/chat'
+    | '/albums'
+  id:
+    | '__root__'
+    | '/'
+    | '/featured'
+    | '/gallery'
+    | '/programme'
+    | '/videos'
+    | '/albums/$slug'
+    | '/api/chat'
+    | '/albums/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  FeaturedRoute: typeof FeaturedRoute
+  GalleryRoute: typeof GalleryRoute
+  ProgrammeRoute: typeof ProgrammeRoute
+  VideosRoute: typeof VideosRoute
+  AlbumsSlugRoute: typeof AlbumsSlugRoute
   ApiChatRoute: typeof ApiChatRoute
+  AlbumsIndexRoute: typeof AlbumsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/videos': {
+      id: '/videos'
+      path: '/videos'
+      fullPath: '/videos'
+      preLoaderRoute: typeof VideosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/programme': {
+      id: '/programme'
+      path: '/programme'
+      fullPath: '/programme'
+      preLoaderRoute: typeof ProgrammeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gallery': {
+      id: '/gallery'
+      path: '/gallery'
+      fullPath: '/gallery'
+      preLoaderRoute: typeof GalleryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/featured': {
+      id: '/featured'
+      path: '/featured'
+      fullPath: '/featured'
+      preLoaderRoute: typeof FeaturedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/albums/': {
+      id: '/albums/'
+      path: '/albums'
+      fullPath: '/albums/'
+      preLoaderRoute: typeof AlbumsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/chat': {
@@ -65,12 +185,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiChatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/albums/$slug': {
+      id: '/albums/$slug'
+      path: '/albums/$slug'
+      fullPath: '/albums/$slug'
+      preLoaderRoute: typeof AlbumsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  FeaturedRoute: FeaturedRoute,
+  GalleryRoute: GalleryRoute,
+  ProgrammeRoute: ProgrammeRoute,
+  VideosRoute: VideosRoute,
+  AlbumsSlugRoute: AlbumsSlugRoute,
   ApiChatRoute: ApiChatRoute,
+  AlbumsIndexRoute: AlbumsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
