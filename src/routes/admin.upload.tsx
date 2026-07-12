@@ -46,6 +46,7 @@ function UploadPage() {
   }
 
   async function uploadOne(i: number) {
+    if (!user) return;
     const row = rows[i];
     setRows((r) => r.map((x, j) => j === i ? { ...x, status: "uploading", progress: 5 } : x));
     try {

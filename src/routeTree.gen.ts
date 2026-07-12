@@ -20,6 +20,11 @@ import { Route as AlbumsIndexRouteImport } from './routes/albums.index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as AlbumsSlugRouteImport } from './routes/albums.$slug'
+import { Route as AdminUsersRouteImport } from './routes/admin.users'
+import { Route as AdminUploadRouteImport } from './routes/admin.upload'
+import { Route as AdminQrRouteImport } from './routes/admin.qr'
+import { Route as AdminMediaRouteImport } from './routes/admin.media'
+import { Route as AdminAlbumsRouteImport } from './routes/admin.albums'
 
 const VideosRoute = VideosRouteImport.update({
   id: '/videos',
@@ -76,6 +81,31 @@ const AlbumsSlugRoute = AlbumsSlugRouteImport.update({
   path: '/albums/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminUsersRoute = AdminUsersRouteImport.update({
+  id: '/users',
+  path: '/users',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminUploadRoute = AdminUploadRouteImport.update({
+  id: '/upload',
+  path: '/upload',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminQrRoute = AdminQrRouteImport.update({
+  id: '/qr',
+  path: '/qr',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminMediaRoute = AdminMediaRouteImport.update({
+  id: '/media',
+  path: '/media',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminAlbumsRoute = AdminAlbumsRouteImport.update({
+  id: '/albums',
+  path: '/albums',
+  getParentRoute: () => AdminRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -85,6 +115,11 @@ export interface FileRoutesByFullPath {
   '/gallery': typeof GalleryRoute
   '/programme': typeof ProgrammeRoute
   '/videos': typeof VideosRoute
+  '/admin/albums': typeof AdminAlbumsRoute
+  '/admin/media': typeof AdminMediaRoute
+  '/admin/qr': typeof AdminQrRoute
+  '/admin/upload': typeof AdminUploadRoute
+  '/admin/users': typeof AdminUsersRoute
   '/albums/$slug': typeof AlbumsSlugRoute
   '/api/chat': typeof ApiChatRoute
   '/admin/': typeof AdminIndexRoute
@@ -97,6 +132,11 @@ export interface FileRoutesByTo {
   '/gallery': typeof GalleryRoute
   '/programme': typeof ProgrammeRoute
   '/videos': typeof VideosRoute
+  '/admin/albums': typeof AdminAlbumsRoute
+  '/admin/media': typeof AdminMediaRoute
+  '/admin/qr': typeof AdminQrRoute
+  '/admin/upload': typeof AdminUploadRoute
+  '/admin/users': typeof AdminUsersRoute
   '/albums/$slug': typeof AlbumsSlugRoute
   '/api/chat': typeof ApiChatRoute
   '/admin': typeof AdminIndexRoute
@@ -111,6 +151,11 @@ export interface FileRoutesById {
   '/gallery': typeof GalleryRoute
   '/programme': typeof ProgrammeRoute
   '/videos': typeof VideosRoute
+  '/admin/albums': typeof AdminAlbumsRoute
+  '/admin/media': typeof AdminMediaRoute
+  '/admin/qr': typeof AdminQrRoute
+  '/admin/upload': typeof AdminUploadRoute
+  '/admin/users': typeof AdminUsersRoute
   '/albums/$slug': typeof AlbumsSlugRoute
   '/api/chat': typeof ApiChatRoute
   '/admin/': typeof AdminIndexRoute
@@ -126,6 +171,11 @@ export interface FileRouteTypes {
     | '/gallery'
     | '/programme'
     | '/videos'
+    | '/admin/albums'
+    | '/admin/media'
+    | '/admin/qr'
+    | '/admin/upload'
+    | '/admin/users'
     | '/albums/$slug'
     | '/api/chat'
     | '/admin/'
@@ -138,6 +188,11 @@ export interface FileRouteTypes {
     | '/gallery'
     | '/programme'
     | '/videos'
+    | '/admin/albums'
+    | '/admin/media'
+    | '/admin/qr'
+    | '/admin/upload'
+    | '/admin/users'
     | '/albums/$slug'
     | '/api/chat'
     | '/admin'
@@ -151,6 +206,11 @@ export interface FileRouteTypes {
     | '/gallery'
     | '/programme'
     | '/videos'
+    | '/admin/albums'
+    | '/admin/media'
+    | '/admin/qr'
+    | '/admin/upload'
+    | '/admin/users'
     | '/albums/$slug'
     | '/api/chat'
     | '/admin/'
@@ -249,14 +309,59 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AlbumsSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/users': {
+      id: '/admin/users'
+      path: '/users'
+      fullPath: '/admin/users'
+      preLoaderRoute: typeof AdminUsersRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/upload': {
+      id: '/admin/upload'
+      path: '/upload'
+      fullPath: '/admin/upload'
+      preLoaderRoute: typeof AdminUploadRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/qr': {
+      id: '/admin/qr'
+      path: '/qr'
+      fullPath: '/admin/qr'
+      preLoaderRoute: typeof AdminQrRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/media': {
+      id: '/admin/media'
+      path: '/media'
+      fullPath: '/admin/media'
+      preLoaderRoute: typeof AdminMediaRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/albums': {
+      id: '/admin/albums'
+      path: '/albums'
+      fullPath: '/admin/albums'
+      preLoaderRoute: typeof AdminAlbumsRouteImport
+      parentRoute: typeof AdminRoute
+    }
   }
 }
 
 interface AdminRouteChildren {
+  AdminAlbumsRoute: typeof AdminAlbumsRoute
+  AdminMediaRoute: typeof AdminMediaRoute
+  AdminQrRoute: typeof AdminQrRoute
+  AdminUploadRoute: typeof AdminUploadRoute
+  AdminUsersRoute: typeof AdminUsersRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
+  AdminAlbumsRoute: AdminAlbumsRoute,
+  AdminMediaRoute: AdminMediaRoute,
+  AdminQrRoute: AdminQrRoute,
+  AdminUploadRoute: AdminUploadRoute,
+  AdminUsersRoute: AdminUsersRoute,
   AdminIndexRoute: AdminIndexRoute,
 }
 
