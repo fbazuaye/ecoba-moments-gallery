@@ -9,38 +9,291 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as VideosRouteImport } from './routes/videos'
+import { Route as ProgrammeRouteImport } from './routes/programme'
+import { Route as GalleryRouteImport } from './routes/gallery'
+import { Route as FeaturedRouteImport } from './routes/featured'
+import { Route as BootstrapRouteImport } from './routes/bootstrap'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AlbumsIndexRouteImport } from './routes/albums.index'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as ApiChatRouteImport } from './routes/api/chat'
+import { Route as AlbumsSlugRouteImport } from './routes/albums.$slug'
+import { Route as AdminUsersRouteImport } from './routes/admin.users'
+import { Route as AdminUploadRouteImport } from './routes/admin.upload'
+import { Route as AdminQrRouteImport } from './routes/admin.qr'
+import { Route as AdminMediaRouteImport } from './routes/admin.media'
+import { Route as AdminAlbumsRouteImport } from './routes/admin.albums'
 
+const VideosRoute = VideosRouteImport.update({
+  id: '/videos',
+  path: '/videos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProgrammeRoute = ProgrammeRouteImport.update({
+  id: '/programme',
+  path: '/programme',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GalleryRoute = GalleryRouteImport.update({
+  id: '/gallery',
+  path: '/gallery',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FeaturedRoute = FeaturedRouteImport.update({
+  id: '/featured',
+  path: '/featured',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BootstrapRoute = BootstrapRouteImport.update({
+  id: '/bootstrap',
+  path: '/bootstrap',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AlbumsIndexRoute = AlbumsIndexRouteImport.update({
+  id: '/albums/',
+  path: '/albums/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const ApiChatRoute = ApiChatRouteImport.update({
+  id: '/api/chat',
+  path: '/api/chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AlbumsSlugRoute = AlbumsSlugRouteImport.update({
+  id: '/albums/$slug',
+  path: '/albums/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminUsersRoute = AdminUsersRouteImport.update({
+  id: '/users',
+  path: '/users',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminUploadRoute = AdminUploadRouteImport.update({
+  id: '/upload',
+  path: '/upload',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminQrRoute = AdminQrRouteImport.update({
+  id: '/qr',
+  path: '/qr',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminMediaRoute = AdminMediaRouteImport.update({
+  id: '/media',
+  path: '/media',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminAlbumsRoute = AdminAlbumsRouteImport.update({
+  id: '/albums',
+  path: '/albums',
+  getParentRoute: () => AdminRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/auth': typeof AuthRoute
+  '/bootstrap': typeof BootstrapRoute
+  '/featured': typeof FeaturedRoute
+  '/gallery': typeof GalleryRoute
+  '/programme': typeof ProgrammeRoute
+  '/videos': typeof VideosRoute
+  '/admin/albums': typeof AdminAlbumsRoute
+  '/admin/media': typeof AdminMediaRoute
+  '/admin/qr': typeof AdminQrRoute
+  '/admin/upload': typeof AdminUploadRoute
+  '/admin/users': typeof AdminUsersRoute
+  '/albums/$slug': typeof AlbumsSlugRoute
+  '/api/chat': typeof ApiChatRoute
+  '/admin/': typeof AdminIndexRoute
+  '/albums/': typeof AlbumsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/bootstrap': typeof BootstrapRoute
+  '/featured': typeof FeaturedRoute
+  '/gallery': typeof GalleryRoute
+  '/programme': typeof ProgrammeRoute
+  '/videos': typeof VideosRoute
+  '/admin/albums': typeof AdminAlbumsRoute
+  '/admin/media': typeof AdminMediaRoute
+  '/admin/qr': typeof AdminQrRoute
+  '/admin/upload': typeof AdminUploadRoute
+  '/admin/users': typeof AdminUsersRoute
+  '/albums/$slug': typeof AlbumsSlugRoute
+  '/api/chat': typeof ApiChatRoute
+  '/admin': typeof AdminIndexRoute
+  '/albums': typeof AlbumsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/auth': typeof AuthRoute
+  '/bootstrap': typeof BootstrapRoute
+  '/featured': typeof FeaturedRoute
+  '/gallery': typeof GalleryRoute
+  '/programme': typeof ProgrammeRoute
+  '/videos': typeof VideosRoute
+  '/admin/albums': typeof AdminAlbumsRoute
+  '/admin/media': typeof AdminMediaRoute
+  '/admin/qr': typeof AdminQrRoute
+  '/admin/upload': typeof AdminUploadRoute
+  '/admin/users': typeof AdminUsersRoute
+  '/albums/$slug': typeof AlbumsSlugRoute
+  '/api/chat': typeof ApiChatRoute
+  '/admin/': typeof AdminIndexRoute
+  '/albums/': typeof AlbumsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/auth'
+    | '/bootstrap'
+    | '/featured'
+    | '/gallery'
+    | '/programme'
+    | '/videos'
+    | '/admin/albums'
+    | '/admin/media'
+    | '/admin/qr'
+    | '/admin/upload'
+    | '/admin/users'
+    | '/albums/$slug'
+    | '/api/chat'
+    | '/admin/'
+    | '/albums/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/auth'
+    | '/bootstrap'
+    | '/featured'
+    | '/gallery'
+    | '/programme'
+    | '/videos'
+    | '/admin/albums'
+    | '/admin/media'
+    | '/admin/qr'
+    | '/admin/upload'
+    | '/admin/users'
+    | '/albums/$slug'
+    | '/api/chat'
+    | '/admin'
+    | '/albums'
+  id:
+    | '__root__'
+    | '/'
+    | '/admin'
+    | '/auth'
+    | '/bootstrap'
+    | '/featured'
+    | '/gallery'
+    | '/programme'
+    | '/videos'
+    | '/admin/albums'
+    | '/admin/media'
+    | '/admin/qr'
+    | '/admin/upload'
+    | '/admin/users'
+    | '/albums/$slug'
+    | '/api/chat'
+    | '/admin/'
+    | '/albums/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRouteWithChildren
+  AuthRoute: typeof AuthRoute
+  BootstrapRoute: typeof BootstrapRoute
+  FeaturedRoute: typeof FeaturedRoute
+  GalleryRoute: typeof GalleryRoute
+  ProgrammeRoute: typeof ProgrammeRoute
+  VideosRoute: typeof VideosRoute
+  AlbumsSlugRoute: typeof AlbumsSlugRoute
+  ApiChatRoute: typeof ApiChatRoute
+  AlbumsIndexRoute: typeof AlbumsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/videos': {
+      id: '/videos'
+      path: '/videos'
+      fullPath: '/videos'
+      preLoaderRoute: typeof VideosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/programme': {
+      id: '/programme'
+      path: '/programme'
+      fullPath: '/programme'
+      preLoaderRoute: typeof ProgrammeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gallery': {
+      id: '/gallery'
+      path: '/gallery'
+      fullPath: '/gallery'
+      preLoaderRoute: typeof GalleryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/featured': {
+      id: '/featured'
+      path: '/featured'
+      fullPath: '/featured'
+      preLoaderRoute: typeof FeaturedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/bootstrap': {
+      id: '/bootstrap'
+      path: '/bootstrap'
+      fullPath: '/bootstrap'
+      preLoaderRoute: typeof BootstrapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,22 +301,105 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/albums/': {
+      id: '/albums/'
+      path: '/albums'
+      fullPath: '/albums/'
+      preLoaderRoute: typeof AlbumsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/api/chat': {
+      id: '/api/chat'
+      path: '/api/chat'
+      fullPath: '/api/chat'
+      preLoaderRoute: typeof ApiChatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/albums/$slug': {
+      id: '/albums/$slug'
+      path: '/albums/$slug'
+      fullPath: '/albums/$slug'
+      preLoaderRoute: typeof AlbumsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/users': {
+      id: '/admin/users'
+      path: '/users'
+      fullPath: '/admin/users'
+      preLoaderRoute: typeof AdminUsersRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/upload': {
+      id: '/admin/upload'
+      path: '/upload'
+      fullPath: '/admin/upload'
+      preLoaderRoute: typeof AdminUploadRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/qr': {
+      id: '/admin/qr'
+      path: '/qr'
+      fullPath: '/admin/qr'
+      preLoaderRoute: typeof AdminQrRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/media': {
+      id: '/admin/media'
+      path: '/media'
+      fullPath: '/admin/media'
+      preLoaderRoute: typeof AdminMediaRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/albums': {
+      id: '/admin/albums'
+      path: '/albums'
+      fullPath: '/admin/albums'
+      preLoaderRoute: typeof AdminAlbumsRouteImport
+      parentRoute: typeof AdminRoute
+    }
   }
 }
 
+interface AdminRouteChildren {
+  AdminAlbumsRoute: typeof AdminAlbumsRoute
+  AdminMediaRoute: typeof AdminMediaRoute
+  AdminQrRoute: typeof AdminQrRoute
+  AdminUploadRoute: typeof AdminUploadRoute
+  AdminUsersRoute: typeof AdminUsersRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminAlbumsRoute: AdminAlbumsRoute,
+  AdminMediaRoute: AdminMediaRoute,
+  AdminQrRoute: AdminQrRoute,
+  AdminUploadRoute: AdminUploadRoute,
+  AdminUsersRoute: AdminUsersRoute,
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRouteWithChildren,
+  AuthRoute: AuthRoute,
+  BootstrapRoute: BootstrapRoute,
+  FeaturedRoute: FeaturedRoute,
+  GalleryRoute: GalleryRoute,
+  ProgrammeRoute: ProgrammeRoute,
+  VideosRoute: VideosRoute,
+  AlbumsSlugRoute: AlbumsSlugRoute,
+  ApiChatRoute: ApiChatRoute,
+  AlbumsIndexRoute: AlbumsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

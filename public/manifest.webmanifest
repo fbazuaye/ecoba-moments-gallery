@@ -1,0 +1,15 @@
+{
+  "name": "ECOBA MOMENTS",
+  "short_name": "ECOBA Moments",
+  "description": "Relive Every Moment. Stay Connected. Official ECOBA NEC Meeting 2026 photo & video experience.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#FFFDF7",
+  "theme_color": "#07583F",
+  "orientation": "portrait-primary",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
