@@ -13,6 +13,7 @@ import { Route as VideosRouteImport } from './routes/videos'
 import { Route as ProgrammeRouteImport } from './routes/programme'
 import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as FeaturedRouteImport } from './routes/featured'
+import { Route as BootstrapRouteImport } from './routes/bootstrap'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
@@ -44,6 +45,11 @@ const GalleryRoute = GalleryRouteImport.update({
 const FeaturedRoute = FeaturedRouteImport.update({
   id: '/featured',
   path: '/featured',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BootstrapRoute = BootstrapRouteImport.update({
+  id: '/bootstrap',
+  path: '/bootstrap',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthRoute = AuthRouteImport.update({
@@ -111,6 +117,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
   '/auth': typeof AuthRoute
+  '/bootstrap': typeof BootstrapRoute
   '/featured': typeof FeaturedRoute
   '/gallery': typeof GalleryRoute
   '/programme': typeof ProgrammeRoute
@@ -128,6 +135,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/bootstrap': typeof BootstrapRoute
   '/featured': typeof FeaturedRoute
   '/gallery': typeof GalleryRoute
   '/programme': typeof ProgrammeRoute
@@ -147,6 +155,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
   '/auth': typeof AuthRoute
+  '/bootstrap': typeof BootstrapRoute
   '/featured': typeof FeaturedRoute
   '/gallery': typeof GalleryRoute
   '/programme': typeof ProgrammeRoute
@@ -167,6 +176,7 @@ export interface FileRouteTypes {
     | '/'
     | '/admin'
     | '/auth'
+    | '/bootstrap'
     | '/featured'
     | '/gallery'
     | '/programme'
@@ -184,6 +194,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/auth'
+    | '/bootstrap'
     | '/featured'
     | '/gallery'
     | '/programme'
@@ -202,6 +213,7 @@ export interface FileRouteTypes {
     | '/'
     | '/admin'
     | '/auth'
+    | '/bootstrap'
     | '/featured'
     | '/gallery'
     | '/programme'
@@ -221,6 +233,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRouteWithChildren
   AuthRoute: typeof AuthRoute
+  BootstrapRoute: typeof BootstrapRoute
   FeaturedRoute: typeof FeaturedRoute
   GalleryRoute: typeof GalleryRoute
   ProgrammeRoute: typeof ProgrammeRoute
@@ -258,6 +271,13 @@ declare module '@tanstack/react-router' {
       path: '/featured'
       fullPath: '/featured'
       preLoaderRoute: typeof FeaturedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/bootstrap': {
+      id: '/bootstrap'
+      path: '/bootstrap'
+      fullPath: '/bootstrap'
+      preLoaderRoute: typeof BootstrapRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth': {
@@ -371,6 +391,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRouteWithChildren,
   AuthRoute: AuthRoute,
+  BootstrapRoute: BootstrapRoute,
   FeaturedRoute: FeaturedRoute,
   GalleryRoute: GalleryRoute,
   ProgrammeRoute: ProgrammeRoute,
@@ -382,13 +403,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
