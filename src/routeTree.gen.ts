@@ -13,8 +13,11 @@ import { Route as VideosRouteImport } from './routes/videos'
 import { Route as ProgrammeRouteImport } from './routes/programme'
 import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as FeaturedRouteImport } from './routes/featured'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AlbumsIndexRouteImport } from './routes/albums.index'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as AlbumsSlugRouteImport } from './routes/albums.$slug'
 
@@ -38,6 +41,16 @@ const FeaturedRoute = FeaturedRouteImport.update({
   path: '/featured',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -47,6 +60,11 @@ const AlbumsIndexRoute = AlbumsIndexRouteImport.update({
   id: '/albums/',
   path: '/albums/',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
 } as any)
 const ApiChatRoute = ApiChatRouteImport.update({
   id: '/api/chat',
@@ -61,70 +79,88 @@ const AlbumsSlugRoute = AlbumsSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/auth': typeof AuthRoute
   '/featured': typeof FeaturedRoute
   '/gallery': typeof GalleryRoute
   '/programme': typeof ProgrammeRoute
   '/videos': typeof VideosRoute
   '/albums/$slug': typeof AlbumsSlugRoute
   '/api/chat': typeof ApiChatRoute
+  '/admin/': typeof AdminIndexRoute
   '/albums/': typeof AlbumsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/featured': typeof FeaturedRoute
   '/gallery': typeof GalleryRoute
   '/programme': typeof ProgrammeRoute
   '/videos': typeof VideosRoute
   '/albums/$slug': typeof AlbumsSlugRoute
   '/api/chat': typeof ApiChatRoute
+  '/admin': typeof AdminIndexRoute
   '/albums': typeof AlbumsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/auth': typeof AuthRoute
   '/featured': typeof FeaturedRoute
   '/gallery': typeof GalleryRoute
   '/programme': typeof ProgrammeRoute
   '/videos': typeof VideosRoute
   '/albums/$slug': typeof AlbumsSlugRoute
   '/api/chat': typeof ApiChatRoute
+  '/admin/': typeof AdminIndexRoute
   '/albums/': typeof AlbumsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/admin'
+    | '/auth'
     | '/featured'
     | '/gallery'
     | '/programme'
     | '/videos'
     | '/albums/$slug'
     | '/api/chat'
+    | '/admin/'
     | '/albums/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/auth'
     | '/featured'
     | '/gallery'
     | '/programme'
     | '/videos'
     | '/albums/$slug'
     | '/api/chat'
+    | '/admin'
     | '/albums'
   id:
     | '__root__'
     | '/'
+    | '/admin'
+    | '/auth'
     | '/featured'
     | '/gallery'
     | '/programme'
     | '/videos'
     | '/albums/$slug'
     | '/api/chat'
+    | '/admin/'
     | '/albums/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRouteWithChildren
+  AuthRoute: typeof AuthRoute
   FeaturedRoute: typeof FeaturedRoute
   GalleryRoute: typeof GalleryRoute
   ProgrammeRoute: typeof ProgrammeRoute
@@ -164,6 +200,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FeaturedRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -177,6 +227,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/albums/'
       preLoaderRoute: typeof AlbumsIndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
     }
     '/api/chat': {
       id: '/api/chat'
@@ -195,8 +252,20 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AdminRouteChildren {
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRouteWithChildren,
+  AuthRoute: AuthRoute,
   FeaturedRoute: FeaturedRoute,
   GalleryRoute: GalleryRoute,
   ProgrammeRoute: ProgrammeRoute,
