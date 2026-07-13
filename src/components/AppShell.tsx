@@ -109,7 +109,18 @@ export function AppShell({ children }: { children: ReactNode }) {
       {/* Main content */}
       <main className={`min-h-dvh ${isAdminRoute ? "" : "pb-20 lg:pb-0"} lg:pl-64 ${aiOpen ? "xl:pr-96" : ""}`}>
         {children}
+        {!isAdminRoute && (
+          <footer className="mt-8 border-t border-border bg-forest text-ivory">
+            <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-6 py-6 text-center text-xs md:flex-row md:text-sm">
+              <div className="text-ivory/70">© {new Date().getFullYear()} ECOBA MOMENTS · Bridging Memories, Building Futures</div>
+              <div className="text-ivory/80">
+                Designed By <span className="font-semibold text-gold">Frank Bazuaye</span> · Powered by <span className="font-semibold text-gold">LiveGig Ltd</span>
+              </div>
+            </div>
+          </footer>
+        )}
       </main>
+
 
       {/* AI Assistant panel (desktop right sidebar) */}
       {!isAdminRoute && (
