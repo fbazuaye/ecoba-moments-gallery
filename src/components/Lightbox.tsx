@@ -74,7 +74,7 @@ export function Lightbox({ items, index, onClose, onIndex }: {
       <div className="relative flex flex-1 items-center justify-center overflow-hidden px-2">
         <button onClick={prev} className="absolute left-2 z-10 grid h-11 w-11 place-items-center rounded-full bg-white/10 text-ivory hover:bg-white/20" aria-label="Previous"><ChevronLeft /></button>
         {url && (item.media_type === "video"
-          ? <video src={url} controls className="max-h-full max-w-full" />
+          ? <video key={item.id} src={url} controls autoPlay playsInline preload="metadata" controlsList="nodownload" className="max-h-full max-w-full object-contain" />
           : <img src={url} alt={item.title ?? ""} className="max-h-full max-w-full object-contain" />)}
         <button onClick={next} className="absolute right-2 z-10 grid h-11 w-11 place-items-center rounded-full bg-white/10 text-ivory hover:bg-white/20" aria-label="Next"><ChevronRight /></button>
       </div>
