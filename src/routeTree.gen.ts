@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as VideosRouteImport } from './routes/videos'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as ProgrammeRouteImport } from './routes/programme'
 import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as FeaturedRouteImport } from './routes/featured'
@@ -30,6 +31,11 @@ import { Route as AdminAlbumsRouteImport } from './routes/admin.albums'
 const VideosRoute = VideosRouteImport.update({
   id: '/videos',
   path: '/videos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProgrammeRoute = ProgrammeRouteImport.update({
@@ -121,6 +127,7 @@ export interface FileRoutesByFullPath {
   '/featured': typeof FeaturedRoute
   '/gallery': typeof GalleryRoute
   '/programme': typeof ProgrammeRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/videos': typeof VideosRoute
   '/admin/albums': typeof AdminAlbumsRoute
   '/admin/media': typeof AdminMediaRoute
@@ -139,6 +146,7 @@ export interface FileRoutesByTo {
   '/featured': typeof FeaturedRoute
   '/gallery': typeof GalleryRoute
   '/programme': typeof ProgrammeRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/videos': typeof VideosRoute
   '/admin/albums': typeof AdminAlbumsRoute
   '/admin/media': typeof AdminMediaRoute
@@ -159,6 +167,7 @@ export interface FileRoutesById {
   '/featured': typeof FeaturedRoute
   '/gallery': typeof GalleryRoute
   '/programme': typeof ProgrammeRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/videos': typeof VideosRoute
   '/admin/albums': typeof AdminAlbumsRoute
   '/admin/media': typeof AdminMediaRoute
@@ -180,6 +189,7 @@ export interface FileRouteTypes {
     | '/featured'
     | '/gallery'
     | '/programme'
+    | '/reset-password'
     | '/videos'
     | '/admin/albums'
     | '/admin/media'
@@ -198,6 +208,7 @@ export interface FileRouteTypes {
     | '/featured'
     | '/gallery'
     | '/programme'
+    | '/reset-password'
     | '/videos'
     | '/admin/albums'
     | '/admin/media'
@@ -217,6 +228,7 @@ export interface FileRouteTypes {
     | '/featured'
     | '/gallery'
     | '/programme'
+    | '/reset-password'
     | '/videos'
     | '/admin/albums'
     | '/admin/media'
@@ -237,6 +249,7 @@ export interface RootRouteChildren {
   FeaturedRoute: typeof FeaturedRoute
   GalleryRoute: typeof GalleryRoute
   ProgrammeRoute: typeof ProgrammeRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
   VideosRoute: typeof VideosRoute
   AlbumsSlugRoute: typeof AlbumsSlugRoute
   ApiChatRoute: typeof ApiChatRoute
@@ -250,6 +263,13 @@ declare module '@tanstack/react-router' {
       path: '/videos'
       fullPath: '/videos'
       preLoaderRoute: typeof VideosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/programme': {
@@ -395,6 +415,7 @@ const rootRouteChildren: RootRouteChildren = {
   FeaturedRoute: FeaturedRoute,
   GalleryRoute: GalleryRoute,
   ProgrammeRoute: ProgrammeRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
   VideosRoute: VideosRoute,
   AlbumsSlugRoute: AlbumsSlugRoute,
   ApiChatRoute: ApiChatRoute,
