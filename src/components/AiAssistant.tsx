@@ -11,12 +11,16 @@ const SUGGESTIONS = [
   "How many photos have been uploaded?",
 ];
 
+const WELCOME: Msg = {
+  role: "assistant",
+  content: "Welcome to Ask ECOBA AI. I can help you navigate the ECOBA NEC Meeting 2026 gallery, programme, and albums. What would you like to see?",
+};
+
 export function AiAssistant({ onClose }: { onClose: () => void }) {
-  const [messages, setMessages] = useState<Msg[]>([{
-    role: "assistant",
-    content: "Welcome to Ask ECOBA AI. I can help you navigate the ECOBA NEC Meeting 2026 gallery, programme, and albums. What would you like to see?",
-  }]);
+  const [messages, setMessages] = useState<Msg[]>([WELCOME]);
   const [input, setInput] = useState("");
+
+  function clear() { setMessages([WELCOME]); }
   const [loading, setLoading] = useState(false);
   const listRef = useRef<HTMLDivElement>(null);
 
