@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { Sparkles, Send, X, Loader2 } from "lucide-react";
+import { Sparkles, Send, X, Loader2, RotateCcw } from "lucide-react";
 
 type Msg = { role: "user" | "assistant"; content: string; links?: { label: string; to: string }[] };
 
