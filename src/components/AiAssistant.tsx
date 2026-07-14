@@ -59,7 +59,10 @@ export function AiAssistant({ onClose }: { onClose: () => void }) {
             <div className="text-[10px] uppercase tracking-widest text-muted-foreground">Your event concierge</div>
           </div>
         </div>
-        <button onClick={onClose} className="rounded-md p-1.5 hover:bg-muted" aria-label="Close AI"><X className="h-4 w-4" /></button>
+        <div className="flex items-center gap-1">
+          <button onClick={clear} className="rounded-md p-1.5 hover:bg-muted" aria-label="Clear chat" title="Clear chat"><RotateCcw className="h-4 w-4" /></button>
+          <button onClick={onClose} className="rounded-md p-1.5 hover:bg-muted" aria-label="Close AI"><X className="h-4 w-4" /></button>
+        </div>
       </div>
 
       <div ref={listRef} className="flex-1 space-y-4 overflow-y-auto px-4 py-4">
