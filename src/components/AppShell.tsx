@@ -111,11 +111,14 @@ export function AppShell({ children }: { children: ReactNode }) {
         {children}
         {!isAdminRoute && (
           <footer className="mt-8 border-t border-border bg-forest text-ivory">
-            <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-6 py-6 text-center text-xs md:flex-row md:text-sm">
-              <div className="text-ivory/70">© {new Date().getFullYear()} ECOBA MOMENTS · Bridging Memories, Building Futures</div>
+            <div className="mx-auto flex max-w-7xl flex-col items-center gap-3 px-6 py-6 text-center text-xs md:text-sm">
               <div className="text-ivory/80">
                 Designed By <span className="font-semibold text-gold">Frank Bazuaye</span> · Powered by <span className="font-semibold text-gold">LiveGig Ltd</span>
               </div>
+              <div className="max-w-2xl text-ivory/70">
+                LiveGig Ltd — Transforming Manual Operations into Intelligent Digital Workflows Using Computer Vision, OCR and AI.
+              </div>
+              <div className="text-ivory/60">© {new Date().getFullYear()} ECOBA MOMENTS · Bridging Memories, Building Futures</div>
             </div>
           </footer>
         )}
