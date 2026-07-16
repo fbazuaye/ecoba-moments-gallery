@@ -36,20 +36,26 @@ export function MediaGrid({ items, onOpen }: { items: MediaItem[]; onOpen: (i: n
 function MediaTile({ item, onClick }: { item: MediaItem; onClick: () => void }) {
   const [url, setUrl] = useState<string>("");
   const isVideo = item.media_type === "video";
-  const hasImageThumb = !!(item.thumbnail_url || (!isVideo && (item.optimised_url || item.original_url)));
+  // Prefer stored thumbnail (real poster). For photos, fall back to optimised/original.
+  // For videos with no poster, use a video element seeking to the first frame.
+  const thumbPath = item.thumbnail_url
+    || (!isVideo ? (item.optimised_url || item.original_url) : "");
+  const videoFallbackPath = isVideo && !thumbPath ? (item.optimised_url || item.original_url) : "";
 
   useEffect(() => {
-    const path = hasImageThumb
-      ? (item.thumbnail_url || item.optimised_url || item.original_url)
-      : (isVideo ? (item.optimised_url || item.original_url) : item.original_url);
+    const path = thumbPath || videoFallbackPath;
+    if (!path) return;
     signedUrl(path).then(setUrl);
-  }, [item, hasImageThumb, isVideo]);
+  }, [thumbPath, videoFallbackPath]);
 
   return (
     <button onClick={onClick}
       className={`group relative aspect-square overflow-hidden rounded-xl bg-muted shadow-soft transition hover:shadow-elegant ${item.featured ? "ring-2 ring-gold" : ""}`}>
       {url ? (
-        isVideo && !hasImageThumb ? (
+        thumbPath ? (
+          <img src={url} alt={item.title ?? "ECOBA moment"} loading="lazy"
+            className="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
+        ) : (
           <video
             src={`${url}#t=0.5`}
             preload="metadata"
@@ -57,14 +63,11 @@ function MediaTile({ item, onClick }: { item: MediaItem; onClick: () => void }) 
             playsInline
             className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
           />
-        ) : (
-          <img src={url} alt={item.title ?? "ECOBA moment"} loading="lazy"
-            className="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
         )
       ) : <div className="h-full w-full animate-pulse bg-muted" />}
       {isVideo && (
-        <div className="absolute inset-0 grid place-items-center bg-black/30">
-          <div className="grid h-12 w-12 place-items-center rounded-full bg-white/95 text-forest"><Play className="h-5 w-5" /></div>
+        <div className="pointer-events-none absolute inset-0 grid place-items-center bg-gradient-to-t from-black/40 via-transparent to-transparent">
+          <div className="grid h-12 w-12 place-items-center rounded-full bg-white/95 text-forest shadow-lg"><Play className="h-5 w-5" fill="currentColor" /></div>
         </div>
       )}
       {item.featured && (
@@ -75,4 +78,5 @@ function MediaTile({ item, onClick }: { item: MediaItem; onClick: () => void }) 
     </button>
   );
 }
+
 
