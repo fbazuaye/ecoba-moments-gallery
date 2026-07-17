@@ -107,30 +107,57 @@ export type Database = {
       analytics_events: {
         Row: {
           album_id: string | null
+          city: string | null
+          country: string | null
+          country_code: string | null
           created_at: string
           device_type: string | null
           event_type: string
           id: string
+          latitude: number | null
+          longitude: number | null
           media_id: string | null
+          path: string | null
+          referrer: string | null
+          region: string | null
           session_id: string | null
+          user_agent: string | null
         }
         Insert: {
           album_id?: string | null
+          city?: string | null
+          country?: string | null
+          country_code?: string | null
           created_at?: string
           device_type?: string | null
           event_type: string
           id?: string
+          latitude?: number | null
+          longitude?: number | null
           media_id?: string | null
+          path?: string | null
+          referrer?: string | null
+          region?: string | null
           session_id?: string | null
+          user_agent?: string | null
         }
         Update: {
           album_id?: string | null
+          city?: string | null
+          country?: string | null
+          country_code?: string | null
           created_at?: string
           device_type?: string | null
           event_type?: string
           id?: string
+          latitude?: number | null
+          longitude?: number | null
           media_id?: string | null
+          path?: string | null
+          referrer?: string | null
+          region?: string | null
           session_id?: string | null
+          user_agent?: string | null
         }
         Relationships: []
       }

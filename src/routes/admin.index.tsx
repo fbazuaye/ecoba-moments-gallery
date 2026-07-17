@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { Images, Video, Layers, Eye, Download, Share2, Upload, QrCode, Plus } from "lucide-react";
+import { AdminAnalytics } from "@/components/AdminAnalytics";
 
 export const Route = createFileRoute("/admin/")({ component: Dashboard });
 
@@ -70,6 +71,8 @@ function Dashboard() {
           {(s?.latest ?? []).length === 0 && <div className="py-8 text-center text-sm text-muted-foreground">No uploads yet. Get started →</div>}
         </div>
       </div>
+
+      <AdminAnalytics />
     </div>
   );
 }
