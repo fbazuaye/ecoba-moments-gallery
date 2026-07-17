@@ -209,7 +209,7 @@ function UploadPage() {
                     </div>
                     <button
                       onClick={() => patch(i, { featured: !r.featured })}
-                      title={r.featured ? "Unfeature" : "Feature on home"}
+                      title={r.featured ? "Hide from Home" : "Show on Home"}
                       className={`rounded-full p-1.5 ${r.featured ? "bg-gold text-forest" : "text-muted-foreground hover:text-gold"}`}>
                       <Star className="h-4 w-4" fill={r.featured ? "currentColor" : "none"} />
                     </button>
