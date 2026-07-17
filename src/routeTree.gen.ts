@@ -27,6 +27,7 @@ import { Route as AdminUploadRouteImport } from './routes/admin.upload'
 import { Route as AdminQrRouteImport } from './routes/admin.qr'
 import { Route as AdminMediaRouteImport } from './routes/admin.media'
 import { Route as AdminAlbumsRouteImport } from './routes/admin.albums'
+import { Route as ApiPublicTrackRouteImport } from './routes/api/public/track'
 
 const VideosRoute = VideosRouteImport.update({
   id: '/videos',
@@ -118,6 +119,11 @@ const AdminAlbumsRoute = AdminAlbumsRouteImport.update({
   path: '/albums',
   getParentRoute: () => AdminRoute,
 } as any)
+const ApiPublicTrackRoute = ApiPublicTrackRouteImport.update({
+  id: '/api/public/track',
+  path: '/api/public/track',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -138,6 +144,7 @@ export interface FileRoutesByFullPath {
   '/api/chat': typeof ApiChatRoute
   '/admin/': typeof AdminIndexRoute
   '/albums/': typeof AlbumsIndexRoute
+  '/api/public/track': typeof ApiPublicTrackRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -157,6 +164,7 @@ export interface FileRoutesByTo {
   '/api/chat': typeof ApiChatRoute
   '/admin': typeof AdminIndexRoute
   '/albums': typeof AlbumsIndexRoute
+  '/api/public/track': typeof ApiPublicTrackRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -178,6 +186,7 @@ export interface FileRoutesById {
   '/api/chat': typeof ApiChatRoute
   '/admin/': typeof AdminIndexRoute
   '/albums/': typeof AlbumsIndexRoute
+  '/api/public/track': typeof ApiPublicTrackRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -200,6 +209,7 @@ export interface FileRouteTypes {
     | '/api/chat'
     | '/admin/'
     | '/albums/'
+    | '/api/public/track'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -219,6 +229,7 @@ export interface FileRouteTypes {
     | '/api/chat'
     | '/admin'
     | '/albums'
+    | '/api/public/track'
   id:
     | '__root__'
     | '/'
@@ -239,6 +250,7 @@ export interface FileRouteTypes {
     | '/api/chat'
     | '/admin/'
     | '/albums/'
+    | '/api/public/track'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -254,6 +266,7 @@ export interface RootRouteChildren {
   AlbumsSlugRoute: typeof AlbumsSlugRoute
   ApiChatRoute: typeof ApiChatRoute
   AlbumsIndexRoute: typeof AlbumsIndexRoute
+  ApiPublicTrackRoute: typeof ApiPublicTrackRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -384,6 +397,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminAlbumsRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/api/public/track': {
+      id: '/api/public/track'
+      path: '/api/public/track'
+      fullPath: '/api/public/track'
+      preLoaderRoute: typeof ApiPublicTrackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -420,6 +440,7 @@ const rootRouteChildren: RootRouteChildren = {
   AlbumsSlugRoute: AlbumsSlugRoute,
   ApiChatRoute: ApiChatRoute,
   AlbumsIndexRoute: AlbumsIndexRoute,
+  ApiPublicTrackRoute: ApiPublicTrackRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
