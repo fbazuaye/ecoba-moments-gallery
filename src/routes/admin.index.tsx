@@ -71,6 +71,9 @@ function Dashboard() {
           {(s?.latest ?? []).length === 0 && <div className="py-8 text-center text-sm text-muted-foreground">No uploads yet. Get started →</div>}
         </div>
       </div>
+
+      <AdminAnalytics />
+    </div>
     </div>
   );
 }
