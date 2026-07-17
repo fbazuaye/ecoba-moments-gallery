@@ -98,9 +98,20 @@ function Home() {
             <div className="text-xs uppercase tracking-widest text-gold">Latest</div>
             <h2 className="font-display text-3xl md:text-4xl">Fresh moments</h2>
           </div>
+          <div>
+            <div className="text-xs uppercase tracking-widest text-gold">On the Home page</div>
+            <h2 className="font-display text-3xl md:text-4xl">Fresh moments</h2>
+            <p className="mt-1 text-xs text-muted-foreground">Admins star items in Upload or the Media Library to feature them here.</p>
+          </div>
           <Link to="/gallery" className="text-sm font-medium text-primary hover:underline">View all →</Link>
         </div>
-        <MediaGrid items={items} onOpen={setLightIdx} />
+        {items.length === 0 ? (
+          <div className="rounded-2xl border border-dashed border-border p-10 text-center text-sm text-muted-foreground">
+            No featured moments yet. Head to <Link to="/gallery" className="text-primary underline">the gallery</Link> to browse everything, or star items in the admin uploader to show them here.
+          </div>
+        ) : (
+          <MediaGrid items={items} onOpen={setLightIdx} />
+        )}
       </section>
 
       {/* JOURNEY */}
