@@ -74,6 +74,5 @@ function Dashboard() {
 
       <AdminAnalytics />
     </div>
-    </div>
   );
 }
