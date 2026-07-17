@@ -27,7 +27,8 @@ function Home() {
     queryKey: ["home-latest"],
     queryFn: async () => {
       const { data } = await supabase.from("media").select("*")
-        .eq("status", "published").order("uploaded_at", { ascending: false }).limit(12);
+        .eq("status", "published").eq("featured", true)
+        .order("uploaded_at", { ascending: false }).limit(12);
       return (data ?? []) as MediaItem[];
     },
   });
