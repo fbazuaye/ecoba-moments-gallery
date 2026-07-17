@@ -63,8 +63,8 @@ function MediaLibrary() {
               </div>
               <div className="absolute inset-x-0 top-0 flex justify-end gap-1 bg-gradient-to-b from-black/60 to-transparent p-2 opacity-0 transition group-hover:opacity-100">
                 <button onClick={() => toggleFeature(m.id, !m.featured)}
-                  title="Feature" className={`grid h-8 w-8 place-items-center rounded-full ${m.featured ? "bg-gold text-forest" : "bg-white/90 text-forest"}`}>
-                  <Star className="h-4 w-4" />
+                  title={m.featured ? "Hide from Home" : "Show on Home"} className={`grid h-8 w-8 place-items-center rounded-full ${m.featured ? "bg-gold text-forest" : "bg-white/90 text-forest"}`}>
+                  <Star className="h-4 w-4" fill={m.featured ? "currentColor" : "none"} />
                 </button>
                 <button onClick={() => togglePublish(m.id, (m as MediaItem & { status: string }).status ?? "published")}
                   title="Publish/Hide" className="grid h-8 w-8 place-items-center rounded-full bg-white/90 text-forest">

@@ -172,6 +172,7 @@ function UploadPage() {
             <Upload className="mb-3 h-10 w-10 text-primary" />
             <div className="font-semibold">Drop files or click to select</div>
             <div className="mt-1 text-xs text-muted-foreground">JPG, PNG, WebP, HEIC · MP4, MOV, WebM · multiple files supported</div>
+            <div className="mt-2 text-[11px] text-gold">Tap the ★ on a file to show it on the Home page. Unstarred files appear only in the gallery/album.</div>
             <input type="file" multiple accept="image/*,video/*,.heic,.heif" className="hidden"
               onChange={(e) => e.target.files && addFiles(e.target.files)} />
           </label>
@@ -208,7 +209,7 @@ function UploadPage() {
                     </div>
                     <button
                       onClick={() => patch(i, { featured: !r.featured })}
-                      title={r.featured ? "Unfeature" : "Feature on home"}
+                      title={r.featured ? "Hide from Home" : "Show on Home"}
                       className={`rounded-full p-1.5 ${r.featured ? "bg-gold text-forest" : "text-muted-foreground hover:text-gold"}`}>
                       <Star className="h-4 w-4" fill={r.featured ? "currentColor" : "none"} />
                     </button>
