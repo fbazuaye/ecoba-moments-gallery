@@ -95,8 +95,6 @@ function Home() {
       <section className="mx-auto max-w-7xl px-6 py-14">
         <div className="mb-6 flex items-end justify-between">
           <div>
-
-          <div>
             <div className="text-xs uppercase tracking-widest text-gold">On the Home page</div>
             <h2 className="font-display text-3xl md:text-4xl">Fresh moments</h2>
             <p className="mt-1 text-xs text-muted-foreground">Admins star items in Upload or the Media Library to feature them here.</p>
