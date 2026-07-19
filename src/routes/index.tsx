@@ -29,7 +29,7 @@ function Home() {
     queryFn: async () => {
       const { data } = await supabase.from("media").select("*")
         .eq("status", "published").eq("featured", true)
-        .order("uploaded_at", { ascending: false }).limit(12);
+        .order("uploaded_at", { ascending: false });
       return (data ?? []) as MediaItem[];
     },
   });
