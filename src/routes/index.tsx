@@ -106,7 +106,7 @@ function Home() {
             No featured moments yet. Head to <Link to="/gallery" className="text-primary underline">the gallery</Link> to browse everything, or star items in the admin uploader to show them here.
           </div>
         ) : (
-          <MediaGrid items={items} onOpen={setLightIdx} />
+          <FeaturedCarousel items={items} onOpen={setLightIdx} />
         )}
       </section>
 
