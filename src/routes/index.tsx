@@ -2,7 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useState } from "react";
-import { MediaGrid, type MediaItem } from "@/components/MediaGrid";
+import { type MediaItem } from "@/components/MediaGrid";
+import { FeaturedCarousel } from "@/components/FeaturedCarousel";
 import { Lightbox } from "@/components/Lightbox";
 import { Logo } from "@/components/Logo";
 import { Calendar, Images, Layers, Video, ArrowRight, Sparkles } from "lucide-react";
@@ -96,7 +97,7 @@ function Home() {
         <div className="mb-6 flex items-end justify-between">
           <div>
             <div className="text-xs uppercase tracking-widest text-gold">On the Home page</div>
-            <h2 className="font-display text-3xl md:text-4xl">Fresh moments</h2>
+            <h2 className="font-display text-3xl md:text-4xl">Featured Photos & Videos</h2>
           </div>
           <Link to="/gallery" className="text-sm font-medium text-primary hover:underline">View all →</Link>
         </div>
@@ -105,7 +106,7 @@ function Home() {
             No featured moments yet. Head to <Link to="/gallery" className="text-primary underline">the gallery</Link> to browse everything, or star items in the admin uploader to show them here.
           </div>
         ) : (
-          <MediaGrid items={items} onOpen={setLightIdx} />
+          <FeaturedCarousel items={items} onOpen={setLightIdx} />
         )}
       </section>
 
