@@ -97,7 +97,7 @@ function Home() {
         <div className="mb-6 flex items-end justify-between">
           <div>
             <div className="text-xs uppercase tracking-widest text-gold">On the Home page</div>
-            <h2 className="font-display text-3xl md:text-4xl">Fresh moments</h2>
+            <h2 className="font-display text-3xl md:text-4xl">Featured Photos & Videos</h2>
           </div>
           <Link to="/gallery" className="text-sm font-medium text-primary hover:underline">View all →</Link>
         </div>
